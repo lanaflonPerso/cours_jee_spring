@@ -38,5 +38,11 @@ public class ProduitControler {
 		produitRepository.deleteById(id);
 		return "redirect:/index?page="+page+"&size="+size+"&mc="+mc;
 	}
+	
+	@RequestMapping(value="/form", method = RequestMethod.GET)
+	public String formProduit() {
+		return "FormProduit";
+		
+	}
 
 }
