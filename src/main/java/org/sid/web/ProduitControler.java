@@ -40,8 +40,16 @@ public class ProduitControler {
 	}
 	
 	@RequestMapping(value="/form", method = RequestMethod.GET)
-	public String formProduit() {
-		return "FormProduit";
+	public String formProduit(Model model) {
+		model.addAttribute("produit", new Produit());
+		return "formProduit";
+		
+	}
+	
+	@RequestMapping(value="/save", method = RequestMethod.POST)
+	public String save(Model model, Produit produit) {
+		produitRepository.save(produit);
+		return "Confirmation";
 		
 	}
 
