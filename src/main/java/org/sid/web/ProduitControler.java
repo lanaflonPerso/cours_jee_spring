@@ -51,9 +51,9 @@ public class ProduitControler {
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
 	public String save(Model model,@Valid Produit produit, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) 
 			return "formProduit";
-		}
+		
 		produitRepository.save(produit);
 		return "Confirmation";
 		
