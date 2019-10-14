@@ -5,50 +5,63 @@
 <head>
 <meta charset="utf-8" />
 <title>Produits</title>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-	
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous" />
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+	integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+	crossorigin="anonymous"></script>
+
 </head>
 <body>
 
+	<div layout:fragment="content">
+		<div class="container">
+			<form th:action="@{index}" method="get">
+				<label>Mot clé :</label> <input type="text" name="mc"
+					th:value="${mc}"></input>
+				<button class="btn btn-primary">Chercher</button>
+			</form>
+		</div>
+		<div class="container">
+			<p>Liste des produits</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Désignition</th>
+						<th>Prix</th>
+						<th>Quantité</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p:${listProduits}">
+						<td th:text="${p.id}"></td>
+						<td th:text="${p.designiation}"></td>
+						<td th:text="${p.prix}"></td>
+						<td th:text="${p.quantite}"></td>
+						<td><a onclick="return confirm('Etes vous sûre?')"
+							th:href="@{delete(id=${p.id}, page=${pageCourante},size=${size},mc=${mc})}">Deleted</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<ul class="nav justify-content-center">
 
-<div class="container" layout:fragment= "content">
-	<form th:action="@{index}" method="get">
-		<label>Mot clé :</label>
-		<input type="text" name="mc" th:value="${mc}"></input>
-		<button class="btn btn-primary">Chercher</button>
-	</form>
-</div>
-	<div class="container">
-		<p>Liste des produits</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Désignition</th>
-					<th>Prix</th>
-					<th>Quantité</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="p:${listProduits}">
-					<td th:text="${p.id}"></td>
-					<td th:text="${p.designiation}"></td>
-					<td th:text="${p.prix}"></td>
-					<td th:text="${p.quantite}"></td>
-					<td><a onclick="return confirm('Etes vous sûre?')" th:href="@{delete(id=${p.id}, page=${pageCourante},size=${size},mc=${mc})}">Deleted</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div>
-		<ul class="nav justify-content-center">
-		
-			<li th:class="${pageCourante}==${status.index}?'active':''" th:each="pa, status:${pages}">
-			<a th:href="@{index(page=${status.index},size=${size}, mc=${mc})}" th:text="${status.index}"></a>
-			</li>
-		</ul>
+				<li th:class="${pageCourante}==${status.index}?'active':''"
+					th:each="pa, status:${pages}"><a
+					th:href="@{index(page=${status.index},size=${size}, mc=${mc})}"
+					th:text="${status.index}"></a></li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
