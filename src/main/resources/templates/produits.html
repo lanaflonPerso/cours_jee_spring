@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+	layout:decorate="~{layout}">
 <head>
 <meta charset="utf-8" />
 <title>Produits</title>
@@ -12,7 +12,8 @@
 </head>
 <body>
 
-<div class="container" layout:fragment="content">
+
+<div class="container" layout:fragment= "content">
 	<form th:action="@{index}" method="get">
 		<label>Mot clé :</label>
 		<input type="text" name="mc" th:value="${mc}"></input>
