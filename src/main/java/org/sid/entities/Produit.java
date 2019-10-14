@@ -15,7 +15,7 @@ public class Produit implements Serializable {
     @Id @GeneratedValue
     private long id;
     @NonNull
-    @Size(min = 4,max = 15)
+    @Size(min = 4,max = 80)
     private String designiation;
     @DecimalMin("100")
 	private double prix;

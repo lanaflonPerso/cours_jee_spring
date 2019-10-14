@@ -47,6 +47,7 @@
 						<td th:text="${p.designiation}"></td>
 						<td th:text="${p.prix}"></td>
 						<td th:text="${p.quantite}"></td>
+						<td><a th:href="@{edit(id=${p.id})}">Edit</a></td>
 						<td><a onclick="return confirm('Etes vous sûre?')"
 							th:href="@{delete(id=${p.id}, page=${pageCourante},size=${size},mc=${mc})}">Deleted</a></td>
 					</tr>

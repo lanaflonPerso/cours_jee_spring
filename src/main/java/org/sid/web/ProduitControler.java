@@ -1,5 +1,7 @@
 package org.sid.web;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.sid.dao.ProduitRepository;
@@ -46,6 +48,18 @@ public class ProduitControler {
 	public String formProduit(Model model) {
 		model.addAttribute("produit", new Produit());
 		return "formProduit";
+		
+	}
+	
+	@RequestMapping(value="/edit", method = RequestMethod.GET)
+	public String editProduit(Model model, Long id) {
+		Optional<Produit> p=produitRepository.findById(id);
+		Produit produit = null;
+		if(p.isPresent()) {
+			produit = p.get();
+		}
+		model.addAttribute("produit", produit);
+		return "editProduit";
 		
 	}
 	
