@@ -27,6 +27,8 @@
 				<ul class="nav nav-navbar">
 					<li><a th:href="@{index}">Chercher</a></li>
 					<li><a th:href="@{form}"> Produits</a></li>
+					<!--ligne de deconexion [["#"indique que http...est un Objet. La ligne recupere la valeur de l'utilisateru authentifié]]-->
+					<li><a th:href="@{/login?logout}" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a></li>
 				</ul>
 			</div>
 		</div>
