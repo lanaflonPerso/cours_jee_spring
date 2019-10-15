@@ -1,5 +1,8 @@
 package org.sid.security;
 
+import javax.activation.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,12 +14,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private DataSource dataSource;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//les utilisateurs sont en memoire, l'utilisateur "admin" a deux roles : "user" et "admin"
 		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("1234")).roles("USER","ADMIN");
 		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("1234")).roles("USER");
+		
+		/*//les utilisateurs sont en memoire, l'utilisateur "admin" a deux roles : "user" et "admin"
+		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("1234")).roles("USER","ADMIN");
+		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("1234")).roles("USER");*/
+		
+		//quelle source utiliser et où aller chercher les users
+		auth.jdbcAuthentication().dataSource((javax.sql.DataSource) dataSource)
+		.usersByUsernameQuery("select login as principal, pass as credentials,active from users where login=?")
+		.authoritiesByUsernameQuery("select login as principal,role as role from users_roles where login=?")
+        .passwordEncoder(passwordEncoder())
+        .rolePrefix("ROLE_");
+		
 	}
+	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
