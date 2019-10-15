@@ -77,5 +77,11 @@ public class ProduitControler {
 	public String home() {
 		return "redirect:/index";
 	}
+	
+	//acces non authorisé à la page
+	@RequestMapping(value="/403")	
+	public String accessDenied() {
+		return "403";
+	}
 
 }
