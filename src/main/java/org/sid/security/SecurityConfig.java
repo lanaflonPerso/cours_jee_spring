@@ -27,12 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("1234")).roles("USER","ADMIN");
 		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("1234")).roles("USER");*/
 		
-		//quelle source utiliser et où aller chercher les users
+		/*//quelle source utiliser et où aller chercher les users
 		auth.jdbcAuthentication().dataSource((javax.sql.DataSource) dataSource)
 		.usersByUsernameQuery("select login as principal, pass as credentials,active from users where login=?")
 		.authoritiesByUsernameQuery("select login as principal,role as role from users_roles where login=?")
         .passwordEncoder(passwordEncoder())
-        .rolePrefix("ROLE_");
+        .rolePrefix("ROLE_");*/
 		
 	}
 	
@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.formLogin();
+		http.formLogin().loginPage("/login");
 		
 		/*une requete http dans l'url "/index" nécessaite une authetification avec un utilisateur avec un rôle "USER"
 		http.authorizeRequests().antMatchers("/index").hasRole("USER");

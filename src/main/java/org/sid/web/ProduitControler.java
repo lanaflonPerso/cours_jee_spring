@@ -83,5 +83,11 @@ public class ProduitControler {
 	public String accessDenied() {
 		return "403";
 	}
+	
+	@RequestMapping(value="/login")
+		public String login() {
+			return "login";
+		}
+	
 
 }
