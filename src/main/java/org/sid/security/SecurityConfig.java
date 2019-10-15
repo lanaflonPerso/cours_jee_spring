@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		//une requete http dans l'url "/form","/save","/edit","/delete" nécessaite une authetification avec un utilisateur avec un rôle "ADMIN"
 		http.authorizeRequests().antMatchers("/form","/save","/edit","/delete").hasRole("ADMIN");
 		//acces non authorisé à la page
-		http.exceptionHandling().accessDeniedPage("403");
+		http.exceptionHandling().accessDeniedPage("/403");
 	}
     @Bean
     public PasswordEncoder passwordEncoder(){
