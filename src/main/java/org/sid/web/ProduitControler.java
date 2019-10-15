@@ -72,5 +72,10 @@ public class ProduitControler {
 		return "Confirmation";
 		
 	}
+	
+	@RequestMapping(value="/")	
+	public String home() {
+		return "redirect:/index";
+	}
 
 }
