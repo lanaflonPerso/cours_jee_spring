@@ -15,8 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	@Autowired
-	private DataSource dataSource;
+	/*@Autowired
+	private DataSource dataSource;*/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//les utilisateurs sont en memoire, l'utilisateur "admin" a deux roles : "user" et "admin"
@@ -56,6 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN");
 		//acces non authorisé à la page
 		http.exceptionHandling().accessDeniedPage("/403");
+		
+
+		
 		
 	}
     @Bean
