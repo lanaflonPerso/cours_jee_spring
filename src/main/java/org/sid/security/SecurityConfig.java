@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.formLogin().loginPage("/login");
 		//desactiver le cross site request forgery
-		http.csrf().disable();
+		//http.csrf().disable();
 		/*une requete http dans l'url "/index" nécessaite une authetification avec un utilisateur avec un rôle "USER"
 		http.authorizeRequests().antMatchers("/index").hasRole("USER");
 		//une requete http dans l'url "/form","/save","/edit","/delete" nécessaite une authetification avec un utilisateur avec un rôle "ADMIN"
