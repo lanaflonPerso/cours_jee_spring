@@ -23,7 +23,14 @@
 </head>
 <body>
 
-	<div class="spacer col-md-6 col-xs-4">
+	<div class="spacer col-md-6 col-md-offset-3 col-xs-12">
+		<div class="container">
+			<span class="red" th:if="${param.error}"> Incorrect Username
+				or password </span> 
+				<span class="red" th:if="${param.logout}">
+				You have been logged out </span>
+		</div>
+
 		<div class="panel panel-primary">
 			<div class="panel-heading">Authentification</div>
 			<div class="panel-body">
