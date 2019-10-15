@@ -23,10 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("1234")).roles("USER","ADMIN");
 		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("1234")).roles("USER");
 		
-		/*//les utilisateurs sont en memoire, l'utilisateur "admin" a deux roles : "user" et "admin"
-		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("1234")).roles("USER","ADMIN");
-		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("1234")).roles("USER");*/
-		
 		/*//quelle source utiliser et où aller chercher les users
 		auth.jdbcAuthentication().dataSource((javax.sql.DataSource) dataSource)
 		.usersByUsernameQuery("select login as principal, pass as credentials,active from users where login=?")
@@ -41,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.formLogin().loginPage("/login");
-		
+		//desactiver le cross site request forgery
+		http.csrf().disable();
 		/*une requete http dans l'url "/index" nécessaite une authetification avec un utilisateur avec un rôle "USER"
 		http.authorizeRequests().antMatchers("/index").hasRole("USER");
 		//une requete http dans l'url "/form","/save","/edit","/delete" nécessaite une authetification avec un utilisateur avec un rôle "ADMIN"
